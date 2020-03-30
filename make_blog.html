@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Blog edit page</title>
+    <meta charset="UTF-8">
+  	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+      p{
+        margin-bottom:0px;
+      }
+      .main-container{
+        display:inline-flex;
+        margin-left:5%;
+        width:100%;
+        text-align: center;
+      }
+      .fontSize{
+        width:50px;
+      }
+      .editor-container{
+        width:40%;
+        border:2px solid black;
+      }
+      .toolbar1{
+        display:inline-flex;
+        padding:5px;
+      }
+      .boldText,.italicText,.underlineText,.h1_Text,.h2_Text, .h3_Text,.centerAlignText,.leftAlignText,.justifyAlignText{
+        background-color:"white";
+        border:0px;
+      }
+      .boldText,.italicText,.underlineText{
+        padding:5px;
+        padding-left:10px;
+        padding-right:10px;
+      }
+      .boldText:hover,.italicText:hover,.underlineText:hover,.h1_Text:hover, .h2_Text:hover, .h3_Text:hover,.centerAlignText:hover,.leftAlignText:hover,.justifyAlignText:hover{
+        background-color:skyblue;
+      }
+      .Add{
+        font-size:30px;
+        font-weight:bold;
+        color:white;
+        background-color:#388E8E;
+        width:30%;
+        text-align:center;
+        margin-left:35%;
+        margin-top:20px;
+        margin-bottom:40px;
+        border:2px solid #388E8E;
+        border-radius:10px;
+      }
+      .Add:hover{
+        background-color:#008B8B;
+      }
+
+      .usertext{
+        width:90%;
+        margin-left:5%;
+        margin-top:20px;
+      }
+      .usertext textarea{
+        width:100%;
+        padding:10px;
+        border:2px solid  #008B8B;
+      }
+      .preview-container{
+        margin-left:50px;
+        border:2px solid black;
+        width:50%;
+        margin-right:10%;
+      }
+      .preview{
+        padding:10px;
+      }
+      .h1_heading{
+        white-space: pre-wrap;
+        text-align:left;
+        font-size:35px;
+        font-family:Baskerville,Baskerville Old Face,Hoefler Text,Garamond,Times New Roman,serif;
+        line-height:1.2;
+      }
+      .h2_heading{
+        white-space: pre-wrap;
+        text-align:left;
+        font-size:28px;
+        font-family:Baskerville,Baskerville Old Face,Hoefler Text,Garamond,Times New Roman,serif;
+        line-height:1.2;
+      }
+      .h3_heading{
+        white-space: pre-wrap;
+        text-align:left;
+        font-size:22px;
+        font-family:Cambria,Georgia,serif;
+        line-height:1.2;
+      }
+    </style>
+  </head>
+  <body onload="initialize()">
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.min.js"
+      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+      crossorigin="anonymous">
+    </script>
+    <div class="main-container">
+      <div class="editor-container">
+        <div class="toolbar">
+          <div class="toolbar1">
+            <div class="H1">
+              <button style= " font-size:22px;font-weight:bold;" class="h1_Text" onclick="text_type(1)">
+                h1
+              </button>
+            </div>
+            <div class="H2">
+              <button style= " font-size:22px;font-weight:bold;" class="h2_Text" onclick="text_type(2)">
+                h2
+              </button>
+            </div>
+            <div class="H3">
+              <button style= " font-size:22px;font-weight:bold;" class="h3_Text" onclick="text_type(3)">
+                h3
+              </button>
+            </div>
+            <div class="bold">
+              <button class="boldText" onclick="boldText()">
+                <i class="fa fa-bold"  style= " font-size:23px;" aria-hidden="true"></i>
+              </button>
+            </div>
+            <div class="italic">
+              <button class="italicText" onclick="italicText()">
+                <i class="fa fa-italic"  style= " font-size:23px;" aria-hidden="true"></i>
+              </button>
+            </div>
+            <div class="underline">
+              <button class= "underlineText" onclick="underlineText()">
+                <i class="fa fa-underline" style= " font-size:23px;" aria-hidden="true"></i>
+              </button>
+            </div>
+            <div class="centerAlign">
+              <button class="centerAlignText"  style= " font-size:22px;" onclick="align_text('c')">
+                <i class="fa fa-align-center" aria-hidden="true"></i>
+              </button>
+            </div>
+            <div class="leftAlign">
+              <button class="leftAlignText"  style= " font-size:22px;" onclick="align_text('l')">
+                <i class="fa fa-align-left" aria-hidden="true"></i>
+              </button>
+            </div>
+            <div class="justifyAlign">
+              <button class="justifyAlignText"  style= " font-size:22px;" onclick="align_text('j')">
+                <i class="fa fa-align-justify" aria-hidden="true"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="textAdd">
+          <div class="usertext usertext1">
+            <textarea class="textbox1" onkeyup='update_preview()' onclick="update_activeClass(1)">
+            </textarea>
+          </div>
+          <div class="Add" onclick="Addtext()">
+            <i class="fa fa-plus" aria-hidden="true" style="font-size:30px;color:white;"></i> ADD
+          </div>
+          <div class="Add Post" onclick="saveStaticDataToFile()">
+            POST
+          </div>
+        </div>
+      </div>
+      <div class="preview-container">
+        <div class="preview">
+          <p class="f_textbox1 h3_heading"></p>
+        </div>
+      </div>
+    </div>
+    <script>
+      var textboxes = 1;
+      var h1_toggle = false;
+      var h2_toggle = false;
+      var h3_toggle = true;
+      var bold_toggle = false;
+      var italic_toggle = false;
+      var underline_toggle = false;
+      var leftAlign_toggle = true;
+      var centerAlign_toggle = false;
+      var justifyAlign_toggle = false;
+      var current_class;
+      var current_previewClass;
+
+      function initialize(){
+        document.querySelector('.h3_Text').style.backgroundColor = "skyblue";
+        document.querySelector('.leftAlignText').style.backgroundColor = "skyblue";
+
+      }
+
+      function text_type(n){
+        for(var i = 1; i < 4; i++){
+          if(i != n){
+            var foo = 'h' + i +"_toggle";
+            document.querySelector('.h' + i + "_Text").style.backgroundColor = "white";
+            if(window[foo]){
+              document.querySelector(current_previewClass).classList.remove("h" + i + "_heading");
+            }
+            window[foo] = false;
+          }
+          else{
+            document.querySelector('.h' + i  + "_Text").style.backgroundColor = "skyblue";
+            document.querySelector(current_previewClass).classList.add("h" + i + "_heading");
+            var foo = 'h' + i +"_toggle";
+            window[foo] = true;
+          }
+        }
+      }
+
+      function Addtext(){
+        textboxes += 1;
+        var textboxHTML = "<div class='usertext usertext" + textboxes + "'>  <textarea class='textbox" + textboxes + "' onkeyup='update_preview()' onclick='update_activeClass(" + textboxes +  ")'></textarea>  </div>";
+        document.querySelector('.usertext' + (textboxes - 1)).insertAdjacentHTML('afterend', textboxHTML);
+        var f_textboxHTML = "<p class='f_textbox" + textboxes + " h3_heading'></p>";
+        document.querySelector('.f_textbox' + (textboxes - 1)).insertAdjacentHTML('afterend', f_textboxHTML);
+      }
+
+      function update_preview(){
+        var data = document.querySelector("." + document.activeElement.className).value;
+        try{
+          current_class = document.activeElement.className;
+          current_previewClass = '.f_' + current_class;
+          document.querySelector(current_previewClass).innerHTML = data;
+        }
+        catch(err){
+          console.log(err);
+        }
+      }
+
+     function update_activeClass(n){
+       current_class = "textbox" + n;
+       current_previewClass = '.f_' + current_class;
+     }
+
+     function align_text(c){
+       if(c == 'c')
+          document.querySelector(current_previewClass).style.textAlign="center";
+       if(c == 'l')
+          document.querySelector(current_previewClass).style.textAlign="left";
+       if(c == 'j')
+          document.querySelector(current_previewClass).style.textAlign="justify";
+   }
+
+    </script>
+  </body>
+</html>
